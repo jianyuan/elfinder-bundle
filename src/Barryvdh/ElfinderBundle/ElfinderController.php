@@ -35,6 +35,17 @@ class ElfinderController extends \BaseController {
         return \View::make('elfinder-bundle::tinymce4')->with(compact('dir', 'locale'));
     }
 
+    public function showCKEditor()
+    {
+
+        $dir = 'packages/barryvdh/elfinder-bundle';
+        $locale = \Config::get('app.locale');
+        if(!file_exists(public_path()."/$dir/js/i18n/elfinder.$locale.js")){
+            $locale = false;
+        }
+        return \View::make('elfinder-bundle::ckeditor')->with(compact('dir', 'locale'));
+    }
+
     public function showConnector(){
 
         $dir = \Config::get('elfinder-bundle::dir');
