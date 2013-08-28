@@ -34,7 +34,7 @@
         $().ready(function() {
             var funcNum = getUrlParam('CKEditorFuncNum');
 
-            var elf = $('#elfinder').elfinder({
+            var $elfinder = $('#elfinder').elfinder({
                 <?php if($locale){ echo "lang: '$locale',\n"; } ?>
                 url: '<?= URL::action('Barryvdh\ElfinderBundle\ElfinderController@showConnector') ?>',
                 getFileCallback : function(file) {
@@ -42,10 +42,24 @@
                     window.close();
                 },
                 resizable: false
-            }).elfinder('instance');
+            });
+
+            var $window = $(window);
+            $window.resize(function() {
+                var currentHeight = $window.height();
+                if ($elfinder.height() != currentHeight) {
+                    $elfinder.height(currentHeight).resize();
+                }
+            });
         });
     </script>
 
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
