@@ -37,6 +37,9 @@
             var $elfinder = $('#elfinder').elfinder({
                 <?php if($locale){ echo "lang: '$locale',\n"; } ?>
                 url: '<?= URL::action('Barryvdh\ElfinderBundle\ElfinderController@showConnector') ?>',
+                customData: {
+                    _token: '<?php echo csrf_token(); ?>'
+                },
                 getFileCallback : function(file) {
                     window.opener.CKEDITOR.tools.callFunction(funcNum, file);
                     window.close();
