@@ -31,7 +31,7 @@
             return (match && match.length > 1) ? match[1] : '' ;
         }
 
-        $().ready(function() {
+        $(function() {
             var funcNum = getUrlParam('CKEditorFuncNum');
 
             var $elfinder = $('#elfinder').elfinder({
@@ -41,7 +41,7 @@
                     _token: '<?php echo csrf_token(); ?>'
                 },
                 getFileCallback : function(file) {
-                    window.opener.CKEDITOR.tools.callFunction(funcNum, file);
+                    window.opener.CKEDITOR.tools.callFunction(funcNum, file.url);
                     window.close();
                 },
                 resizable: false
